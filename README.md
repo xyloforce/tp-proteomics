@@ -57,13 +57,12 @@ ax.plot(x, np.full(len(x), 0.2),
 fig.show()
 ```
 
-L'affichage dans la cellule de rendu du notebook devrait confirmer la bonne installation des dépendances.
-
-
 * Creation des objets `fig`et `ax`
 * Ajout successif de graphiques sur la même figure par l'appel à des methodes de l'objet `ax`
 * Affichage de la figure complète via `fig.show()`
 * Evaluation de la cellule pour visualisation dans la cellule de résultats.
+
+L'affichage dans la cellule de rendu du notebook devrait confirmer la bonne installation des dépendances.
 
 #### On entend par figure un graphique avec des **axes légendés et un titre**.
 
