@@ -31,8 +31,8 @@ Jupyter est une environnement de type notebook permettant l'execution de code py
 
 #### Test de l'installation
 
-Dans l'inteface de jupyter, creez un nouveau fichier notebook (*.ipynb).
-Dans la première cellule 
+Dans l'inteface de jupyter, créez un nouveau fichier notebook (*.ipynb).
+Dans la première cellule copiez le code suivant:
 
 ```python
 %matplotlib nbagg
@@ -41,7 +41,7 @@ import numpy as np
 from scipy.stats import norm
 ```
 
-La première ligne sert à activer le rendu graphique, pour tout le fichier notebook. Pour **dessiner des graphiques**, il vous est conseillé de suivre cette méthode:
+La première ligne sert à activer le rendu graphique, pour tout le fichier notebook. Pour **dessiner des graphiques**, il vous est conseillé de suivre la méthode illustrée par le code suivant que vous pouvez executer dans une deuxième cellule notebook.
 
 ```python
 fig, ax = plt.subplots()
@@ -72,17 +72,17 @@ La documentation matplotlib est bien faite, mais **attention** il vous est deman
 
 ### Mesures experimentales
 
-Un fichier `data/TCL_wt1.tsv` contenant les données d'abondances differentielles effectuées sur une souche sauvage d'*Escherichia coli* entre deux conditions, avec Tetracycline et en milieu riche. Le contrôle est le milieu riche.
+Un fichier `data/TCL_wt1.tsv` contenant les données d'abondances differentielles mesurées sur une souche sauvage d'*Escherichia coli* entre deux conditions: avec Tetracycline et en milieu riche. Le contrôle est le milieu riche.
 
 | Accession | Description | Gene Symbol  |   Corrected Abundance ratio (1.53)    | Log2 Corrected Abundance Ratio | Abundance Ratio Adj. P-Value |   -LOG10 Adj.P-val |
 | --- | --- | --- | --- | --- | --- | ---|
 | Uniprot Identifier | Texte libre | Texte libre  | $\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}$ | $Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})$  | Réel positif OU indéfini | Réel positif OU indéfini  |
 
-Attention certaines valeurs numériques sont manquantes ou erronées, constatez par vous même.
+Attention certaines valeurs numériques sont manquantes ou erronées, constatez par vous même en parcourant rapidement le fichier.
 
 ### Fiches uniprot
 
-Les fiches de toutes les protéines de E.coli sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin à l'aide, du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement  inspectez dans un navigateur.
+Les fiches de toutes les protéines de E.coli sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin, à l'aide du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement  inspectez dans un navigateur.
 
 ```python
 from xml.etree.ElementTree import parse, dump
@@ -114,7 +114,7 @@ Les nombres d'occurence de tous les termes GO trouvés dans le protéome de E.co
 
 ## Objectifs
 
-Representer graphiquement les données d'abondance et construire la pvalue des fonctions biologiques (terme GO) portées par les protéines sur-abondantes.
+Representer graphiquement les données d'abondance et construire la pvalue des fonctions biologiques (termes GO) portées par les protéines sur-abondantes.
 
 ### Description statistique des Fold Change
 
@@ -130,9 +130,8 @@ Representer graphiquement les données d'abondance et construire la pvalue des f
 
 ```
 
-##### 4. Superposez la densité de probabilité de cette loi sur l'histogramme. Attention, la densité de probabilité devra être mis à l'echelle de l'histogramme:
+##### 4. Superposez la densité de probabilité de cette loi sur l'histogramme. Attention, la densité de probabilité devra être mis à l'echelle de l'histogramme (cf ci-dessous)
 
-![Histogramme](histogram_log2FC.png "Title")
 
 ```python
 hist = ax.hist(_, bins=100) # draw histogram
@@ -142,6 +141,8 @@ scale = len(_)*dx # scale accordingly
 ax.plot(x, norm.pdf(x, mu, sqrt(S_2))*scale) # compute theoritical PDF and draw it
 ```
 
+![Histogramme à inserez ici](histogram_log2FC.png "Title")
+
 ##### 5. Quelles remarques peut-on faire à l'observation de l'histogramme et de loi théorique?
 
 ```
@@ -149,7 +150,7 @@ ax.plot(x, norm.pdf(x, mu, sqrt(S_2))*scale) # compute theoritical PDF and draw 
 
 ```
 
-##### Construction d'un volcano plot
+#### Construction d'un volcano plot
 
 ##### A l'aide de la méthode [scatter](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.scatter.html) representer $-\text{Log}_{10}({\text{p-value}}) = f(\text{Log}_2(\text{abundance ratio}))$
 
@@ -158,6 +159,8 @@ Sont condidérées comme surabondantes les proteines remplissant ces deux critè
 
 * $\text{Log}_2(\text{abundance ratio}) > \mu$  
 * $\text{p-value} > 0.1%$ 
+
+![Volcano plot + cadran à inserez ici](histogram_log2FC.png "Title")
 
 ### Analyse Fonctionelle de pathway
 
@@ -188,31 +191,29 @@ A ce stade, on se contentera des identifiants GO (eg `GO:0005737`). Vous pouvez 
 
 #### 3. Obtention des paramètres du modèle
 
-Nous evaluerons la significativité de la présence de tous les termes GO portées par les protéines surabondantes à l'aide d'un modèle hypergéometrique.
+Nous evaluerons la significativité de la présence de tous les termes GO portés par les protéines surabondantes à l'aide d'un modèle hypergéometrique.
+
 Si k protéines surabondantes porte un terme GO, la pvalue de ce terme sera équivalente à $P(X\ge k), X \sim H(k,K,n,N)$.
-Où,
-
 Completer le tableau ci-dessous avec les quantités vous  semblant adéquates
-
 
 | Symbole | Paramètre | Quantités Biologique |
 | --- | --- | --- |
 | k | nombre de succès observés| |
 | K | nombre de succès possibles| |
-| n | nombre d'observation| |
+| n | nombre d'observations| |
 | N | nombre d'elements observables| |
-
 
 #### 4. Calcul de l'enrichissement en fonction biologiques
 
-A l'aide du contenu de `data/EColiK12_GOcounts.json` parametrez une loi hypergeomtrique et calculez les pvalues
-des termes GO portés par les protéines sur-abondantes et reporte ces données dans le tablau ci-dessous
+A l'aide du contenu de `data/EColiK12_GOcounts.json` parametrez la loi hypergeometrique et calculez la pvalue
+de chaque terme GO portés par les protéines sur-abondantes. Vous reportez ces données dans le tableau ci-dessous
 
 | identifiant GO | définition | occurence | pvalue|
 |---|---|---|---|
 |   |   |   |   |
 
-Quelle interpretation biologique faites-vous de cet enrichissement en fonction biologiques spécifiques ?
+Quelle interpretation biologique faites-vous de cet enrichissement en termes GO spécifiques ?
+
 ```
 
 
