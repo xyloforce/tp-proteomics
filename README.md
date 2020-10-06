@@ -29,7 +29,7 @@ Jupyter est une environnement de type notebook permettant l'execution de code py
 #### Procédure virtualenv
 
 
-##### Test de l'installation
+#### Test de l'installation
 
 Dans l'inteface de jupyter, creez un nouveau fichier notebook (*.ipynb).
 Dans la première cellule 
