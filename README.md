@@ -40,7 +40,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 from scipy.stats import norm
 ```
-La première ligne sert à activer le rendu graphique, pour tout le fichier notebook.
+
+La première ligne sert à activer le rendu graphique, pour tout le fichier notebook. Pour **dessiner des graphiques**, il vous est conseillé de suivre cette méthode:
+
 ```python
 fig, ax = plt.subplots()
 x = np.linspace(norm.ppf(0.01),
@@ -55,8 +57,8 @@ ax.plot(x, np.full(len(x), 0.2),
 fig.show()
 ```
 
+L'affichage dans la cellule de rendu du notebook devrait confirmer la bonne installation des dépendances.
 
-Pour **dessiner des graphiques**, il vous est conseillé de suivre cette méthode:
 
 * Creation des objets `fig`et `ax`
 * Ajout successif de graphiques sur la même figure par l'appel à des methodes de l'objet `ax`
