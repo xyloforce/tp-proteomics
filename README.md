@@ -319,7 +319,7 @@ Sont condidérées comme surabondantes les proteines remplissant ces deux critè
 * <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})\gt\mu%2B\sigma">  
 * <img src="https://render.githubusercontent.com/render/math?math=\text{p-value}>0.001">
 
-![Volcano plot + cadran à inserez ici](histogram_log2FC.png "Title")
+![Volcano plot + quadrant à inserez ici](histogram_log2FC.png "Title")
 
 ### Analyse Fonctionelle de pathway
 
