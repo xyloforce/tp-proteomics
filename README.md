@@ -124,7 +124,7 @@ Representer graphiquement les données d'abondance et construire la pvalue des f
 
 ##### 2. Representez par un histogramme les valeurs de `Log2 Corrected Abundance Ratio`
 
-##### 3. A partir de cette échantillon de ratio d'abondance,  estimez la moyenne $\mu$ et l'ecart-type $\sigma$ d'une loi normale.
+##### 3. A partir de cette échantillon de ratio d'abondance,  estimez la moyenne <img src="https://render.githubusercontent.com/render/math?math=\mu"> et l'ecart-type <img src="https://render.githubusercontent.com/render/math?math=\sigma"> d'une loi normale.
 ```
 
 
@@ -157,8 +157,8 @@ ax.plot(x, norm.pdf(x, mu, sqrt(S_2))*scale) # compute theoritical PDF and draw 
 ##### Matérialisez le quadran des protéines surabondantes, par deux droites ou un rectangle
 Sont condidérées comme surabondantes les proteines remplissant ces deux critères:
 
-* <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})\mu">  
-* <img src="https://render.githubusercontent.com/render/math?math=\text{p-value} > 0.1%"> 
+* <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})>\mu+\sigma">  
+* <img src="https://render.githubusercontent.com/render/math?math=\text{p-value}>0.001">
 
 ![Volcano plot + cadran à inserez ici](histogram_log2FC.png "Title")
 
