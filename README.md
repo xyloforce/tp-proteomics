@@ -76,7 +76,7 @@ Un fichier `data/TCL_wt1.tsv` contenant les données d'abondances differentielle
 
 | Accession | Description | Gene Symbol  |   Corrected Abundance ratio (1.53)    | Log2 Corrected Abundance Ratio | Abundance Ratio Adj. P-Value |   -LOG10 Adj.P-val |
 | --- | --- | --- | --- | --- | --- | ---|
-| Uniprot Identifier | Texte libre | Texte libre  | <img src="https://render.githubusercontent.com/render/math?math=\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}"> | $Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})$  | Réel positif OU indéfini | Réel positif OU indéfini  |
+| Uniprot Identifier | Texte libre | Texte libre  | <img src="https://render.githubusercontent.com/render/math?math=\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}"> | <img src="https://render.githubusercontent.com/render/math?math=Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})">  | Réel positif OU indéfini | Réel positif OU indéfini  |
 
 Attention certaines valeurs numériques sont manquantes ou erronées, constatez par vous même en parcourant rapidement le fichier.
 
@@ -152,13 +152,13 @@ ax.plot(x, norm.pdf(x, mu, sqrt(S_2))*scale) # compute theoritical PDF and draw 
 
 #### Construction d'un volcano plot
 
-##### A l'aide de la méthode [scatter](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.scatter.html) representer $-\text{Log}_{10}({\text{p-value}}) = f(\text{Log}_2(\text{abundance ratio}))$
+##### A l'aide de la méthode [scatter](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.scatter.html) representer <img src="https://render.githubusercontent.com/render/math?math=-\text{Log}_{10}({\text{p-value}}) = f(\text{Log}_2(\text{abundance ratio}))">
 
 ##### Matérialisez le quadran des protéines surabondantes, par deux droites ou un rectangle
 Sont condidérées comme surabondantes les proteines remplissant ces deux critères:
 
-* $\text{Log}_2(\text{abundance ratio}) > \mu$  
-* $\text{p-value} > 0.1%$ 
+* <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})\mu">  
+* <img src="https://render.githubusercontent.com/render/math?math=\text{p-value} > 0.1%"> 
 
 ![Volcano plot + cadran à inserez ici](histogram_log2FC.png "Title")
 
@@ -193,7 +193,7 @@ A ce stade, on se contentera des identifiants GO (eg `GO:0005737`). Vous pouvez 
 
 Nous evaluerons la significativité de la présence de tous les termes GO portés par les protéines surabondantes à l'aide d'un modèle hypergéometrique.
 
-Si k protéines surabondantes porte un terme GO, la pvalue de ce terme sera équivalente à $P(X\ge k), X \sim H(k,K,n,N)$.
+Si k protéines surabondantes porte un terme GO, la pvalue de ce terme sera équivalente à <img src="https://render.githubusercontent.com/render/math?math=P(X\ge k), X \sim H(k,K,n,N)">.
 Completer le tableau ci-dessous avec les quantités vous  semblant adéquates
 
 | Symbole | Paramètre | Quantités Biologique |
