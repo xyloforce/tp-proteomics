@@ -161,6 +161,21 @@ NB : si vous avez des messages d’erreur qui s’affichent (missing precursor c
 ```
 ```
 
+### Visualisation des PSM, peptides - protéines
+
+Après avoir l’interrogation des données avec les moteurs de recherche, nous allons utiliser PeptideShaker pour identifier les peptides et protéines. Cliquer sur le fichier PeptideShaker-1.16.45.jar dans le dossier PeptideShaker-1.16.45. 
+Une page de dialogue va s’ouvrir et cliquer sur New project.
+
+Project details : 
+- Donner un nom au projet
+- Donner un nom à l’échantillons 
+Input files : 
+- Charger le fichier searchgui que vous avez généré 
+- Charger le fichier .mgf 
+- Charge la base de données FASTA
+
+Enregistrer votre projet sous le nom que vous souhaitez (l’extension du fichier sera .cpsx)
+
 
 ## II ) Analyse Bioinformatique
 
@@ -183,14 +198,14 @@ $PATH_TO_CONDA_DIR/bin/conda install -c conda-forge scipy notebook
 $PATH_TO_CONDA_DIR/bin/jupyter notebook
 ```
 
-Jupyter est une environnement de type notebook permettant l'execution de code python dans ces cellules avec une persitance des variables entre chaque evaluation de cellule. Jupyter fournit nativement le support de la librarie graphique matplotlib.
+Jupyter est une environnement de type notebook permettant l'execution de code python dans des cellules avec une persitance des variables entre chaque evaluation de cellule. Jupyter fournit nativement le support de la librarie graphique matplotlib.
 
 #### Procédure virtualenv
 
 
 #### Test de l'installation
 
-Dans l'inteface de jupyter, créez un nouveau fichier notebook (*.ipynb).
+Dans l'inteface de jupyter, créez un nouveau fichier notebook (*.ipynb) localisé dans votre repertoire git.
 Dans la première cellule copiez le code suivant:
 
 ```python
@@ -225,23 +240,23 @@ L'affichage dans la cellule de rendu du notebook devrait confirmer la bonne inst
 
 #### On entend par figure un graphique avec des **axes légendés et un titre**.
 
-La documentation matplotlib est bien faite, mais **attention** il vous est demandé, pour la construction des graphiques, **d'ignorer les méthodes de l'objet `plt`** (frequemment proposées sur le net) et d'utiliser uniquement les méthodes de l'[objet Axes](https://matplotlib.org/api/axes_api.html?highlight=axe#plotting). `plt` est un objet global susceptible d'agir simultanement sur tous les graphiques d'un notebook. A ce stade, son utilisation est donc à eviter.
+La documentation matplotlib est bien faite, mais **attention** il vous est demandé, pour la construction des graphiques, **d'ignorer les méthodes de l'objet `plt`** (frequemment proposées sur le net) et d'utiliser uniquement les méthodes de l'[objet Axes](https://matplotlib.org/api/axes_api.html?highlight=axe#plotting). `plt` est un objet global susceptible d'agir simultanement sur tous les graphiques d'un notebook. A ce stade, son utilisation est donc à éviter.
 
 ## Données disponibles
 
 ### Mesures experimentales
 
-Un fichier `data/TCL_wt1.tsv` contenant les données d'abondances differentielles mesurées sur une souche sauvage d'*Escherichia coli* entre deux conditions: avec Tetracycline et en milieu riche. Le contrôle est le milieu riche.
+Un fichier `data/TCL_wt1.tsv` contient les données d'abondances differentielles mesurées sur une souche sauvage d'*Escherichia coli* entre deux conditions: avec Tetracycline et en milieu riche. Le contrôle est le milieu riche.
 
 | Accession | Description | Gene Symbol  |   Corrected Abundance ratio (1.53)    | Log2 Corrected Abundance Ratio | Abundance Ratio Adj. P-Value |   -LOG10 Adj.P-val |
 | --- | --- | --- | --- | --- | --- | ---|
-| Uniprot Identifier | Texte libre | Texte libre  | <img src="https://render.githubusercontent.com/render/math?math=\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}"> | <img src="https://render.githubusercontent.com/render/math?math=Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})">  | Réel positif OU indéfini | Réel positif OU indéfini  |
+| [Accesseur Uniprot](https://www.uniprot.org/help/accession_numbers)  | Texte libre | Texte libre  | <img src="https://render.githubusercontent.com/render/math?math=\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}"> | <img src="https://render.githubusercontent.com/render/math?math=Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})">  | <img src="https://render.githubusercontent.com/render/math?math=\mathbb{R}^%2B"> | <img src="https://render.githubusercontent.com/render/math?math=\mathbb{R}^%2B">  |
 
 Attention certaines valeurs numériques sont manquantes ou erronées, constatez par vous même en parcourant rapidement le fichier.
 
 ### Fiches uniprot
 
-Les fiches de toutes les protéines de E.coli sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin, à l'aide du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement  inspectez dans un navigateur.
+Les fiches de toutes les protéines de *E.coli* sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin, à l'aide du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement  inspectez dans un navigateur.
 
 ```python
 from xml.etree.ElementTree import parse, dump
@@ -273,7 +288,7 @@ Les nombres d'occurence de tous les termes GO trouvés dans le protéome de E.co
 
 ## Objectifs
 
-Representer graphiquement les données d'abondance et construire la pvalue des fonctions biologiques (termes GO) portées par les protéines sur-abondantes.
+Representer graphiquement les données d'abondance et construire la pvalue des fonctions biologiques (termes GO) portées par les protéines surabondantes.
 
 ### Description statistique des Fold Change
 
@@ -365,7 +380,7 @@ Completer le tableau ci-dessous avec les quantités vous  semblant adéquates
 #### 4. Calcul de l'enrichissement en fonction biologiques
 
 A l'aide du contenu de `data/EColiK12_GOcounts.json` parametrez la loi hypergeometrique et calculez la pvalue
-de chaque terme GO portés par les protéines sur-abondantes. Vous reportez ces données dans le tableau ci-dessous
+de chaque terme GO portés par les protéines surabondantes. Vous reportez ces données dans le tableau ci-dessous
 
 | identifiant GO | définition | occurence | pvalue|
 |---|---|---|---|
