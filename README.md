@@ -76,7 +76,7 @@ Un fichier `data/TCL_wt1.tsv` contenant les données d'abondances differentielle
 
 | Accession | Description | Gene Symbol  |   Corrected Abundance ratio (1.53)    | Log2 Corrected Abundance Ratio | Abundance Ratio Adj. P-Value |   -LOG10 Adj.P-val |
 | --- | --- | --- | --- | --- | --- | ---|
-| Uniprot Identifier | Texte libre | Texte libre  | $\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}$ | $Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})$  | Réel positif OU indéfini | Réel positif OU indéfini  |
+| Uniprot Identifier | Texte libre | Texte libre  | <img src="https://render.githubusercontent.com/render/math?math=\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}}"> | $Log_2(\frac{\text{WildType}_{\text{Tc}}}{\text{WildType}_{\text{rich}}})$  | Réel positif OU indéfini | Réel positif OU indéfini  |
 
 Attention certaines valeurs numériques sont manquantes ou erronées, constatez par vous même en parcourant rapidement le fichier.
 
