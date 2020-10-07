@@ -1,11 +1,170 @@
 # tp-proteomics
+## Contexte Biologique
+Vous allez utiliser des outils informatiques qui vous permettront d’analyser des données brutes issues d’une analyse Shotgun Proteomics récemment publiée dans le journal Science sous le titre "Real-time visualization of drug resistance acquisition by horizontal gene transfer reveals a new role for AcrAB-TolC multidrug efflux pump".
+
+Les données associées à cette publication sont publiques et accessibles sur la plateforme [PRIDE](https://www.ebi.ac.uk/pride/archive/projects/PXD011286). Le PDF de la publication est `data/Nolivos_2019.pdf`.
 
 ## Mise en place
 
 ### Méthodologie
 
 Vous forkerez le présent "repository" pour vous permettre de sauvegarder votre travail.
-Vous éditerez ce fichier `README.md` pour répondre aux questions dans les encarts prévus à cet effet et inserer les figures que vous aurez générées.
+Vous éditerez ce fichier `README.md` pour répondre aux questions dans les encarts prévus à cet effet et inserer les figures que vous aurez générées. Ce "repository" vous appartenant, vous pouvez créer tous les repertoires et fichiers necessaires à la conduite du TP.
+
+## I ) Recherche et identification de protéines (peptides) à partir d’expériences de Shotgun Proteomics
+
+L’objectif principal de cette partie est de vous familiariser avec le pipeline d’analyse de données en shotgun proteomics (approche bottum-up) que nous avons vu en cours. 
+
+### Ressources
+
+Outils à récupérer sur la plateforme pédagogique :
+- proteowizard: http://proteowizard.sourceforge.net/ (windows uniquement)
+- searchgui: http://compomics.github.io/projects/searchgui.html (version windows, version mac + linux)
+- peptide shaker: http://compomics.github.io/projects/peptide-shaker.html (toutes les plateformes)
+
+Dans un dossier où vous conserverez toutes les données de ce TP, vous aurez placé au préalable les fichiers suivants :
+- données brutes du QEXactive (extension .raw)
+- fichiers convertis des données MS (extension .mgf)
+
+### Observations
+
+Cette partie du TP est découpée en 4 grandes parties avec pour chacune des parties, le cheminement à suivre qui n’est pas exhaustif, c’est-à-dire que vous pouvez de vous-même aller explorer les différentes options proposées par les logiciels (en particulier PeptideShaker). A l’issue du TP, vous completerez le fichier markdown avec vos réponses aux différentes questions qui vous seront posées.
+
+### Création de la base de données des protéines
+
+#### Questions: 
+
+##### En quoi consiste l’approche Shotgun proteomics?
+
+```
+
+```
+
+##### Quel est l’objectif de cette approche ?
+
+```
+
+```
+
+#### Procédure
+-	Rechercher la base de données des protéines d’E. coli sur [UNIPROT](https://www.uniprot.org/)
+-	Télécharger toutes les séquences FASTA des protéines Swiss-prot. : format canonical, uncompressed (onglet download).
+-	Sauvegarder le fichier FASTA
+-	Télécharger le fichier FASTA correspondant à la protéine suivante : « P00761 ».
+-	Copier le fichier FASTA de la protéine P00761 à la suite du fichier FASTA du protéome bactérien.
+-	NB : le fichier FASTA s’ouvre avec un éditeur de texte. 
+
+#### Questions
+
+##### L’identification des protéines/ peptides se réalise grâce à une base de données de protéines. Quelle comparaison va être effectuée?
+
+```
+
+```
+
+##### Existe t’il d’autres types de bases de données pour réaliser l’identification des peptides trypsiques dans un spectre?
+
+```
+
+```
+
+##### Est-ce qu’il est possible d’identifier des peptides sans base de données?
+```
+
+```
+##### Combien de protéines sont identifiées dans le protéome bactérien?
+```
+
+```
+##### Comment la liste des séquences des protéines est-elle établie ? Est-elle complète? 
+```
+
+```
+##### Quelle est la différence entre des séquences Swiss-prot et TremBL?
+```
+
+```
+##### A quoi correspond la protéine P00761 et quelle est sa fonction ? 
+```
+
+```
+##### Pourquoi doit-on rajouter cette protéine dans le fichier FASTA final du protéome bactérien?
+```
+
+```
+
+### Création de la « peak list »
+
+De nombreux petits logiciels existent pour convertir vos fichiers bruts dans un format lisible par les moteurs de recherche. Il existe de nombreux formats de fichiers (diversité des appareillages, équipementiers etc..) qui ne peuvent pas être exploités directement. Vous trouverez en Open access de nombreux convertisseurs de fichiers MSConvert (Proteowizard), PAVA etc… Ici vous allez utiliser MSconvert (plateforme pédagogique).
+
+1. Cliquer sur MSConvertGUI.exe
+2. l’interface graphique MSConvert va s’afficher : 
+![](assets/MSConvert_screen.png "MS convert screencast")
+3. charger le fichier .raw (en haut à gauche, File-browse-add)
+4. charger un fichier de destination (TP MADP)
+5. output format : sélectionner mgf et laisser les autres paramètres par défaut
+6. dans la section filters, sélectionner peak picking, Algorithme vendor –cliquer sur add
+7. cliquer sur start
+8. les fichiers.raw doivent être convertis en .mgf
+
+
+
+#### Question
+
+##### Les données de QExactive ont été enregistrées en mode centroïde et non pas en mode Profiling. D’après vous quelle est la différence entre les deux modes?
+
+```
+
+```
+
+### Identification des peptides par approche PSM Peptide to Spectrum Matching
+
+1. Cliquer sur SearchGUI-3.3.20.jar
+NB : si vous avez des messages d’erreur qui s’affichent (missing precursor charges) à un moment donné du process – mettez NO 
+2. charger le fichier .mgf (spectrum file)
+3. charger un fichier de destination (TP MADP)
+4. dans l’onglet search settings, vous allez définir vos paramètres de recherche (cf. Material & Methods de l’article): add
+5. donner un nom à vos paramètres de recherche et cliquer sur Spectrum matching
+6. Charger votre fichier .FASTA 
+7. Ajouter les modifications fixes et variables 
+8. Rentrer les paramètres suivants : enzyme, missed cleavage, fragments, tolerance (comme illustré) 
+9. Cliquer sur OK et enregistrer votre recherche 
+10. Dans la page de dialogue SearchGUI, sélectionner les deux moteurs de recherche X.tandem et OMSSA. 
+11. Cliquer sur START 
+12. Une page de dialogue va s’afficher, montrant l’avancée de la recherche. 
+13. Dans votre fichier d’enregistrement de vos données, vous allez obtenir un fichier de sortie qui est nommé searchgui_out.zip. Il contient le fichier d’analyse OMSSA (.omx) et X ! Tandem (.xml)
+
+#### Questions 
+##### Pourquoi est-il important de bien choisir sa base de données?
+```
+```
+##### Est-ce que l’on retrouvera toujours les mêmes protéines au cours du temps ?
+```
+```
+
+##### Comment la taille de la base de données peut affecter le score de la protéine recherchée?
+```
+```
+
+##### Est-ce que les modifications ajoutées sont les seules modifications que l’on peut attendre dans une expérience de shotgun proteomics?
+```
+```
+
+##### Vous avez choisi la trypsine comme enzyme et choisi « specific », qu’est-ce que cela signifie, et comment cela peut affecter le processing ? 
+```
+```
+
+##### Qu’est-ce qu’un missed cleavage ? pourquoi 2 et pas 0 ?
+```
+```
+##### Qu’est-ce que la tolérance en masse, comment la calcule-t-on ?
+```
+```
+
+
+## II ) Analyse Bioinformatique
+
+
 
 ### Ressources
 
@@ -157,7 +316,7 @@ ax.plot(x, norm.pdf(x, mu, sqrt(S_2))*scale) # compute theoritical PDF and draw 
 ##### Matérialisez le quadran des protéines surabondantes, par deux droites ou un rectangle
 Sont condidérées comme surabondantes les proteines remplissant ces deux critères:
 
-* <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})>\mu+\sigma">  
+* <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})\gt\mu%2B\sigma">  
 * <img src="https://render.githubusercontent.com/render/math?math=\text{p-value}>0.001">
 
 ![Volcano plot + cadran à inserez ici](histogram_log2FC.png "Title")
