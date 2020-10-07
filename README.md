@@ -202,6 +202,7 @@ Jupyter est une environnement de type notebook permettant l'execution de code py
 
 #### Procédure virtualenv
 
+N/A
 
 #### Test de l'installation
 
