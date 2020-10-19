@@ -9,6 +9,7 @@ Les données associées à cette publication sont publiques et accessibles sur l
 ### Méthodologie
 
 Vous forkerez le présent "repository" pour vous permettre de sauvegarder votre travail.
+Vous le clonerez ensuite dans votre espace de travail.
 Vous éditerez ce fichier `README.md` pour répondre aux questions dans les encarts prévus à cet effet et inserer les figures que vous aurez générées. Ce "repository" vous appartenant, vous pouvez créer tous les repertoires et fichiers necessaires à la conduite du TP.
 
 ### Ressources
@@ -27,17 +28,18 @@ Depuis le repertoire de votre repository Git, installez le package scipy et lanc
 $PATH_TO_CONDA_DIR/bin/conda install -c conda-forge scipy notebook
 $PATH_TO_CONDA_DIR/bin/jupyter notebook
 ```
-
-Jupyter est une environnement de type notebook permettant l'execution de code python dans des cellules avec une persitance des variables entre chaque evaluation de cellule. Jupyter fournit nativement le support de la librarie graphique matplotlib.
-
 #### Procédure VM IFB
 
 Une "appliance" IFB a été préparée avec les dépendances Python requises.
 Elle est accessible [ici](https://biosphere.france-bioinformatique.fr/catalogue/appliance/160/).
+Jupyter vous permettra d'ouvrir des terminaux SHELL et des notebook Python.
+Le repertoire racine de Jupyter est `/mnt/mydatalocal/`
 
 #### Procédure virtualenv
 
 N/A
+
+Jupyter est une environnement de type notebook permettant l'execution de code python dans des cellules avec une persitance des variables entre chaque evaluation de cellule. Jupyter fournit nativement le support de la librarie graphique matplotlib.
 
 #### Test de l'installation
 
@@ -311,7 +313,7 @@ Nous evaluerons la significativité de la présence de tous les termes GO porté
 Si k protéines surabondantes porte un terme GO, la pvalue de ce terme sera équivalente à <img src="https://render.githubusercontent.com/render/math?math=P(X\ge k), X \sim H(k,K,n,N)">.
 Completer le tableau ci-dessous avec les quantités vous  semblant adéquates
 
-| Symbole | Paramètre | Quantités Biologique |
+| Symboles | Paramètres | Quantités Biologiques |
 | --- | --- | --- |
 | k | nombre de succès observés| |
 | K | nombre de succès possibles| |
