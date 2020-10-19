@@ -11,176 +11,6 @@ Les données associées à cette publication sont publiques et accessibles sur l
 Vous forkerez le présent "repository" pour vous permettre de sauvegarder votre travail.
 Vous éditerez ce fichier `README.md` pour répondre aux questions dans les encarts prévus à cet effet et inserer les figures que vous aurez générées. Ce "repository" vous appartenant, vous pouvez créer tous les repertoires et fichiers necessaires à la conduite du TP.
 
-## I ) Recherche et identification de protéines (peptides) à partir d’expériences de Shotgun Proteomics
-
-L’objectif principal de cette partie est de vous familiariser avec le pipeline d’analyse de données en shotgun proteomics (approche bottum-up) que nous avons vu en cours. 
-
-### Ressources
-
-Outils à récupérer sur la plateforme pédagogique :
-- proteowizard: http://proteowizard.sourceforge.net/ (windows uniquement)
-- searchgui: http://compomics.github.io/projects/searchgui.html (version windows, version mac + linux)
-- peptide shaker: http://compomics.github.io/projects/peptide-shaker.html (toutes les plateformes)
-
-Dans un dossier où vous conserverez toutes les données de ce TP, vous aurez placé au préalable les fichiers suivants :
-- données brutes du QEXactive (extension .raw)
-- fichiers convertis des données MS (extension .mgf)
-
-### Observations
-
-Cette partie du TP est découpée en 4 grandes parties avec pour chacune des parties, le cheminement à suivre qui n’est pas exhaustif, c’est-à-dire que vous pouvez de vous-même aller explorer les différentes options proposées par les logiciels (en particulier PeptideShaker). A l’issue du TP, vous completerez le fichier markdown avec vos réponses aux différentes questions qui vous seront posées.
-
-### Création de la base de données des protéines
-
-#### Questions: 
-
-##### En quoi consiste l’approche Shotgun proteomics?
-
-```
-
-```
-
-##### Quel est l’objectif de cette approche ?
-
-```
-
-```
-
-#### Procédure
--	Rechercher la base de données des protéines d’E. coli sur [UNIPROT](https://www.uniprot.org/)
--	Télécharger toutes les séquences FASTA des protéines Swiss-prot. : format canonical, uncompressed (onglet download).
--	Sauvegarder le fichier FASTA
--	Télécharger le fichier FASTA correspondant à la protéine suivante : « P00761 ».
--	Copier le fichier FASTA de la protéine P00761 à la suite du fichier FASTA du protéome bactérien.
--	NB : le fichier FASTA s’ouvre avec un éditeur de texte. 
-
-#### Questions
-
-##### L’identification des protéines/ peptides se réalise grâce à une base de données de protéines. Quelle comparaison va être effectuée?
-
-```
-
-```
-
-##### Existe t’il d’autres types de bases de données pour réaliser l’identification des peptides trypsiques dans un spectre?
-
-```
-
-```
-
-##### Est-ce qu’il est possible d’identifier des peptides sans base de données?
-```
-
-```
-##### Combien de protéines sont identifiées dans le protéome bactérien?
-```
-
-```
-##### Comment la liste des séquences des protéines est-elle établie ? Est-elle complète? 
-```
-
-```
-##### Quelle est la différence entre des séquences Swiss-prot et TremBL?
-```
-
-```
-##### A quoi correspond la protéine P00761 et quelle est sa fonction ? 
-```
-
-```
-##### Pourquoi doit-on rajouter cette protéine dans le fichier FASTA final du protéome bactérien?
-```
-
-```
-
-### Création de la « peak list »
-
-De nombreux petits logiciels existent pour convertir vos fichiers bruts dans un format lisible par les moteurs de recherche. Il existe de nombreux formats de fichiers (diversité des appareillages, équipementiers etc..) qui ne peuvent pas être exploités directement. Vous trouverez en Open access de nombreux convertisseurs de fichiers MSConvert (Proteowizard), PAVA etc… Ici vous allez utiliser MSconvert (plateforme pédagogique).
-
-1. Cliquer sur MSConvertGUI.exe
-2. l’interface graphique MSConvert va s’afficher : 
-![](assets/MSConvert_screen.png "MS convert screencast")
-3. charger le fichier .raw (en haut à gauche, File-browse-add)
-4. charger un fichier de destination (TP MADP)
-5. output format : sélectionner mgf et laisser les autres paramètres par défaut
-6. dans la section filters, sélectionner peak picking, Algorithme vendor –cliquer sur add
-7. cliquer sur start
-8. les fichiers.raw doivent être convertis en .mgf
-
-
-
-#### Question
-
-##### Les données de QExactive ont été enregistrées en mode centroïde et non pas en mode Profiling. D’après vous quelle est la différence entre les deux modes?
-
-```
-
-```
-
-### Identification des peptides par approche PSM Peptide to Spectrum Matching
-
-1. Cliquer sur SearchGUI-3.3.20.jar
-NB : si vous avez des messages d’erreur qui s’affichent (missing precursor charges) à un moment donné du process – mettez NO 
-2. charger le fichier .mgf (spectrum file)
-3. charger un fichier de destination (TP MADP)
-4. dans l’onglet search settings, vous allez définir vos paramètres de recherche (cf. Material & Methods de l’article): add
-5. donner un nom à vos paramètres de recherche et cliquer sur Spectrum matching
-6. Charger votre fichier .FASTA 
-7. Ajouter les modifications fixes et variables 
-8. Rentrer les paramètres suivants : enzyme, missed cleavage, fragments, tolerance (comme illustré) 
-9. Cliquer sur OK et enregistrer votre recherche 
-10. Dans la page de dialogue SearchGUI, sélectionner les deux moteurs de recherche X.tandem et OMSSA. 
-11. Cliquer sur START 
-12. Une page de dialogue va s’afficher, montrant l’avancée de la recherche. 
-13. Dans votre fichier d’enregistrement de vos données, vous allez obtenir un fichier de sortie qui est nommé searchgui_out.zip. Il contient le fichier d’analyse OMSSA (.omx) et X ! Tandem (.xml)
-
-#### Questions 
-##### Pourquoi est-il important de bien choisir sa base de données?
-```
-```
-##### Est-ce que l’on retrouvera toujours les mêmes protéines au cours du temps ?
-```
-```
-
-##### Comment la taille de la base de données peut affecter le score de la protéine recherchée?
-```
-```
-
-##### Est-ce que les modifications ajoutées sont les seules modifications que l’on peut attendre dans une expérience de shotgun proteomics?
-```
-```
-
-##### Vous avez choisi la trypsine comme enzyme et choisi « specific », qu’est-ce que cela signifie, et comment cela peut affecter le processing ? 
-```
-```
-
-##### Qu’est-ce qu’un missed cleavage ? pourquoi 2 et pas 0 ?
-```
-```
-##### Qu’est-ce que la tolérance en masse, comment la calcule-t-on ?
-```
-```
-
-### Visualisation des PSM, peptides - protéines
-
-Après avoir l’interrogation des données avec les moteurs de recherche, nous allons utiliser PeptideShaker pour identifier les peptides et protéines. Cliquer sur le fichier PeptideShaker-1.16.45.jar dans le dossier PeptideShaker-1.16.45. 
-Une page de dialogue va s’ouvrir et cliquer sur New project.
-
-Project details : 
-- Donner un nom au projet
-- Donner un nom à l’échantillons 
-Input files : 
-- Charger le fichier searchgui que vous avez généré 
-- Charger le fichier .mgf 
-- Charge la base de données FASTA
-
-Enregistrer votre projet sous le nom que vous souhaitez (l’extension du fichier sera .cpsx)
-
-
-## II ) Analyse Bioinformatique
-
-
-
 ### Ressources
 
 Seul le langage Python (v3.X) est requis pour ce travail.
@@ -199,6 +29,11 @@ $PATH_TO_CONDA_DIR/bin/jupyter notebook
 ```
 
 Jupyter est une environnement de type notebook permettant l'execution de code python dans des cellules avec une persitance des variables entre chaque evaluation de cellule. Jupyter fournit nativement le support de la librarie graphique matplotlib.
+
+#### Procédure VM IFB
+
+Une "appliance" IFB a été préparée avec les dépendances Python requises.
+Elle est accessible [ici](https://biosphere.france-bioinformatique.fr/catalogue/appliance/160/).
 
 #### Procédure virtualenv
 
@@ -281,7 +116,7 @@ for entry in proteins:
             break
 ```
 
-Cherchez par exemple le sous arbre de la protéine codée par le gene LacZ
+Cherchez par exemple le sous arbre de la protéine nommée `DACD_ECOLI`
 
 ### Statistiques de termes GO
 
@@ -289,13 +124,118 @@ Les nombres d'occurence de tous les termes GO trouvés dans le protéome de E.co
 
 ## Objectifs
 
-Representer graphiquement les données d'abondance et construire la pvalue des fonctions biologiques (termes GO) portées par les protéines surabondantes.
+1. Manipuler les données experimentales tabulées
+2. Representer graphiquement les données d'abondance
+3. Construire la pvalue des fonctions biologiques (termes GO) portées par les protéines surabondantes
+4. Visualiser interactivement les pathways plus enrichis.
 
 ### Description statistique des Fold Change
+La lecture des données au format tabulé est l'occasion de se familliariser avec la [librairie pandas](https://pandas.pydata.org).
 
-##### source:`data/TCL_wt1.tsv`
 
-##### 1. Charger le contenu de ce fichier dans un notebook en eliminant les lignes porteuses de valeurs numériques aberrantes.
+##### Lecture de données
+###### source:`data/TCL_wt1.tsv`
+La fonction `read_csv` accepte différents [arguments](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html) de format de données très utiles.
+```python
+df = pandas.read_csv()
+```
+
+Quel est le type de l'objet `df`?
+```
+
+```
+
+##### Descriptions d'une table de données
+Que permettent les méthodes suivantes?
+###### df.shape
+```
+```
+###### df.head
+```
+```
+###### df.tail
+```
+```
+###### df.columns
+```
+```
+###### df.dtypes
+```
+```
+###### df.info
+```
+```
+###### df.describe
+```
+```
+
+##### Accès aux éléments d'une table de données
+
+```python
+values = df[['Description', 'Gene Symbol']]
+```
+
+Quel est le type de `values` ?
+
+Verifiez si certaines méthodes de `DataFrame` lui sont applicables.
+Ce type supporte l'accès par indice et les slice `[a:b]`
+
+##### Accès indicé
+
+On peut accéder aux valeurs du DataFrame via des indices ou plages d'indice. La structure se comporte alors comme une matrice. La cellule en haut et à gauche est de coordonnées (0,0).
+Il y a différentes manières de le faire, l'utilisation de `.iloc[slice_ligne,slice_colonne]` constitue une des solutions les plus simples. N'oublions pas que shape permet d'obtenir les dimensions (lignes et colonnes) du DataFrame.
+###### Acceder aux cinq premières lignes de toutes les colonnes
+```python
+
+```
+
+###### Acceder à toutes les lignes de la dernière colonne
+```python
+
+```
+
+###### Acceder aux cinq premières lignes des colonnes 0, 2 et 3
+```python
+
+```
+
+##### Conversion de type
+
+Le type des valeurs d'une colonne peut être spécifiée:
+
+* à la lecture
+
+```python
+pandas.read_csv('data/TCL_wt1.tsv', sep="\t",  dtype = {'Accession': str, 'Description': str, 'Gene Symbol': str, 
+                                                 'Corrected Abundance ratio (1.53)': np.float,  'Log2 Corrected Abundance Ratio': np.float, 
+                                                 'Abundance Ratio Adj. P-Value: (127. T3 Tc WT) / (126. T0 WT)': np.float, '-LOG10 Adj.P-val': np.float})
+```
+
+* modifiée à la volée
+
+```python
+df = df.astype({'Log2 Corrected Abundance Ratio': float, '-LOG10 Adj.P-val': float } )
+```
+
+##### Selection avec contraintes
+La méthode `loc` permet de selectionner toutes les lignes/colonnes respectant certaines contraintes
+
+* Contraintes de valeurs continues
+
+```python
+df.loc[(df['-LOG10 Adj.P-val'] < 0 )  & (df['Log2 Corrected Abundance Ratio'] > 0.0 ) ]
+```
+
+* Contraintes de valeurs discrètes
+
+```python
+df.loc[ df['Gene Symbol'].isin(['fadR', 'arcA'] ) ]
+```
+
+
+#### Appliquons ces outils à l'analyse de données protéomique
+
+##### 1. Charger le contenu du fichier `data/TCL_wt1.tsv` dans un notebook en eliminant les lignes porteuses de valeurs numériques aberrantes
 
 ##### 2. Representez par un histogramme les valeurs de `Log2 Corrected Abundance Ratio`
 
@@ -329,7 +269,7 @@ ax.plot(x, norm.pdf(x, mu, sqrt(S_2))*scale) # compute theoritical PDF and draw 
 
 ##### A l'aide de la méthode [scatter](https://matplotlib.org/3.1.1/api/_as_gen/matplotlib.axes.Axes.scatter.html) representer <img src="https://render.githubusercontent.com/render/math?math=-\text{Log}_{10}({\text{p-value}}) = f(\text{Log}_2(\text{abundance ratio}))">
 
-##### Matérialisez le quadran des protéines surabondantes, par deux droites ou un rectangle
+##### Matérialisez le quadrant des protéines surabondantes, par deux droites ou un rectangle
 Sont condidérées comme surabondantes les proteines remplissant ces deux critères:
 
 * <img src="https://render.githubusercontent.com/render/math?math=\text{Log}_2(\text{abundance ratio})\gt\mu%2B\sigma">  
@@ -395,3 +335,5 @@ Quelle interpretation biologique faites-vous de cet enrichissement en termes GO 
 
 
 ```
+
+
