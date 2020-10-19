@@ -155,26 +155,29 @@ Que permettent les méthodes suivantes?
 ```
 Affichage de la forme du dataframe (2024:7)
 ```
-###### df.head
+###### df.head()
 ```
-5 premières et dernières lignes du dataframe avec le header
+5 premières lignes du dataframe avec le header
 ```
-###### df.tail
+###### df.tail()
 ```
-Même chose
+5 dernières lignes
 ```
 ###### df.columns
 ```
-
+Noms des colomnes
 ```
 ###### df.dtypes
 ```
+Types du contenu de chaque colomne
 ```
 ###### df.info
 ```
+Détails sur la classe
 ```
 ###### df.describe
 ```
+Affiche des statistiques descriptives sur les colomnes du fichier qui sont numériques
 ```
 
 ##### Accès aux éléments d'une table de données
@@ -194,17 +197,17 @@ On peut accéder aux valeurs du DataFrame via des indices ou plages d'indice. La
 Il y a différentes manières de le faire, l'utilisation de `.iloc[slice_ligne,slice_colonne]` constitue une des solutions les plus simples. N'oublions pas que shape permet d'obtenir les dimensions (lignes et colonnes) du DataFrame.
 ###### Acceder aux cinq premières lignes de toutes les colonnes
 ```python
-
+df.iloc[:5,:]
 ```
 
 ###### Acceder à toutes les lignes de la dernière colonne
 ```python
-
+df.iloc[:,-1:]
 ```
 
 ###### Acceder aux cinq premières lignes des colonnes 0, 2 et 3
 ```python
-
+df.iloc[:5,[0,2,3]]
 ```
 
 ##### Conversion de type
@@ -231,7 +234,7 @@ La méthode `loc` permet de selectionner toutes les lignes/colonnes respectant c
 * Contraintes de valeurs continues
 
 ```python
-df.loc[(df['-LOG10 Adj.P-val'] < 0 )  & (df['Log2 Corrected Abundance Ratio'] > 0.0 ) ]
+df.loc[(df['-LOG10 Adj.P-val'] > 0 )  & (df['Log2 Corrected Abundance Ratio'] > 0.0 ) ]
 ```
 
 * Contraintes de valeurs discrètes
@@ -247,10 +250,21 @@ df.loc[ df['Gene Symbol'].isin(['fadR', 'arcA'] ) ]
 
 ##### 2. Representez par un histogramme les valeurs de `Log2 Corrected Abundance Ratio`
 
-##### 3. A partir de cette échantillon de ratio d'abondance,  estimez la moyenne <img src="https://render.githubusercontent.com/render/math?math=\mu"> et l'ecart-type <img src="https://render.githubusercontent.com/render/math?math=\sigma"> d'une loi normale.
+```
+fig, ax = plt.subplots()
+plt.style.use("seaborn")
+ax.hist(x=df["Log2 Corrected Abundance Ratio"].tolist(), bins=25)
+ax.set_xlabel("Valeur de log2")
+ax.set_ylabel("Comptage protéique")
+
+On observe pas de symétrie et la médiane est située aux alentours de -1: c'est normal car la tétracycline neutralise la traduction et donc diminue la quantité de protéines en conditions tétra.
 ```
 
-
+##### 3. A partir de cette échantillon de ratio d'abondance,  estimez la moyenne <img src="https://render.githubusercontent.com/render/math?math=\mu"> et l'ecart-type <img src="https://render.githubusercontent.com/render/math?math=\sigma"> d'une loi normale.
+```
+Moyenne : -0.638626
+Variance échantillon : 0.22148743516636266
+Variance estimée (corrigée) : 0.4704898017787741
 ```
 
 ##### 4. Superposez la densité de probabilité de cette loi sur l'histogramme. Attention, la densité de probabilité devra être mis à l'echelle de l'histogramme (cf ci-dessous)
@@ -264,7 +278,7 @@ scale = len(_)*dx # scale accordingly
 ax.plot(x, norm.pdf(x, mu, sqrt(S_2))*scale) # compute theoritical PDF and draw it
 ```
 
-![Histogramme à inserez ici](histogram_log2FC.png "Title")
+![Majolifigure](prettyfig.png "figure")
 
 ##### 5. Quelles remarques peut-on faire à l'observation de l'histogramme et de loi théorique?
 
