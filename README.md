@@ -94,7 +94,7 @@ Attention certaines valeurs numériques sont manquantes ou erronées, constatez 
 
 ### Fiches uniprot
 
-Les fiches de toutes les protéines de *E.coli* sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin, à l'aide du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement  inspectez dans un navigateur.
+Les fiches de toutes les protéines de *E.coli* sont stockées dans un seul document XML `data/uniprot-proteome_UP000000625.xml`. Nous allons extraire de ce fichier les informations dont nous aurons besoin, à l'aide du module de la librarie standard [XML.etree](https://docs.python.org/3/library/xml.etree.elementtree.html#module-xml.etree.ElementTree). Pour vous facilitez la tâche, les exemples suivants vous sont fournis. Prenez le temps de les executer et de les modifier dans un notebook. Vous vous familliariserez ainsi avec la structure du document XML que vous pouvez egalement inspecter dans un navigateur.
 
 ```python
 from xml.etree.ElementTree import parse, dump
@@ -122,7 +122,7 @@ Cherchez par exemple le sous arbre de la protéine nommée `DACD_ECOLI`
 
 ### Statistiques de termes GO
 
-Les nombres d'occurence de tous les termes GO trouvés dans le protéome de E.coli sont stockés dans le fichier `data/EColiK12_GOcounts.json`. Ces statistiques ont été dérivées du fichier `data/uniprot-proteome_UP000000625.xml`.
+Les nombres d'occurences de tous les termes GO trouvés dans le protéome de E.coli sont stockés dans le fichier `data/EColiK12_GOcounts.json`. Ces statistiques ont été dérivées du fichier `data/uniprot-proteome_UP000000625.xml`.
 
 ## Objectifs
 
@@ -134,10 +134,12 @@ Les nombres d'occurence de tous les termes GO trouvés dans le protéome de E.co
 ### Description statistique des Fold Change
 La lecture des données au format tabulé est l'occasion de se familliariser avec la [librairie pandas](https://pandas.pydata.org).
 
-
 ##### Lecture de données
+
 ###### source:`data/TCL_wt1.tsv`
+
 La fonction `read_csv` accepte différents [arguments](https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.read_csv.html) de format de données très utiles.
+
 ```python
 df = pandas.read_csv()
 ```
@@ -323,7 +325,7 @@ Completer le tableau ci-dessous avec les quantités vous  semblant adéquates
 #### 4. Calcul de l'enrichissement en fonction biologiques
 
 A l'aide du contenu de `data/EColiK12_GOcounts.json` parametrez la loi hypergeometrique et calculez la pvalue
-de chaque terme GO portés par les protéines surabondantes. Vous reportez ces données dans le tableau ci-dessous
+de chaque terme GO portés par les protéines surabondantes. Vous reporterez ces données dans le tableau ci-dessous
 
 | identifiant GO | définition | occurence | pvalue|
 |---|---|---|---|
