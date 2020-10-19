@@ -146,22 +146,26 @@ df = pandas.read_csv()
 
 Quel est le type de l'objet `df`?
 ```
-
+pandas.core.frame.DataFrame
 ```
 
 ##### Descriptions d'une table de données
 Que permettent les méthodes suivantes?
 ###### df.shape
 ```
+Affichage de la forme du dataframe (2024:7)
 ```
 ###### df.head
 ```
+5 premières et dernières lignes du dataframe avec le header
 ```
 ###### df.tail
 ```
+Même chose
 ```
 ###### df.columns
 ```
+
 ```
 ###### df.dtypes
 ```
